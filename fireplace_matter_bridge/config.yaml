@@ -1,0 +1,27 @@
+# Home Assistant add-on manifest.
+name: Fireplace Matter Bridge
+version: "1.0.0"
+slug: fireplace_matter_bridge
+description: Exposes Proflame 2 fireplaces to Apple Home (and any Matter controller) as a Matter bridge
+url: https://github.com/mikegull/homeassistant-proflame2-Matter
+arch:
+  - aarch64
+  - amd64
+init: false
+startup: application
+boot: auto
+# Matter needs mDNS and IPv6 on the LAN
+host_network: true
+homeassistant_api: true
+map:
+  - addon_config:rw
+options:
+  bridge_name: Fireplace Bridge
+  port: 5540
+  passcode: 20202021
+  discriminator: 3840
+schema:
+  bridge_name: str
+  port: port
+  passcode: int(1,99999998)
+  discriminator: int(0,4095)

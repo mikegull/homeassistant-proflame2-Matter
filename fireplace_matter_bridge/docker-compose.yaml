@@ -1,0 +1,14 @@
+# Standalone deployment (any Linux host on the chalet LAN, e.g. next to Home Assistant).
+services:
+  fireplace-matter-bridge:
+    build: .
+    restart: unless-stopped
+    network_mode: host          # Matter needs mDNS + IPv6 on the LAN
+    environment:
+      HA_URL: ws://10.57.100.2:8123/api/websocket
+      HA_TOKEN: ${HA_TOKEN}     # long-lived access token, e.g. in a .env file next to this one
+      STORAGE_PATH: /data
+    volumes:
+      - ./data:/data
+      - ./bridge.yaml:/app/bridge.yaml:ro
+    working_dir: /app

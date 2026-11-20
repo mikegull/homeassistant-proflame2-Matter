@@ -1,0 +1,5 @@
+fireplace_matter_bridge/.env
+fireplace_matter_bridge/.matter-storage/
+fireplace_matter_bridge/bridge.yaml
+fireplace_matter_bridge/data/
+node_modules/

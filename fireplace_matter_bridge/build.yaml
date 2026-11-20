@@ -1,0 +1,4 @@
+# The add-on uses the official Node.js image instead of the Home Assistant base image.
+build_from:
+  aarch64: node:22-alpine
+  amd64: node:22-alpine

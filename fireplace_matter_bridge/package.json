@@ -1,0 +1,26 @@
+{
+  "name": "fireplace-matter-bridge",
+  "version": "1.0.0",
+  "description": "Expose Proflame fireplaces from Home Assistant to Apple Home (and any Matter controller) as a Matter bridge",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "fireplace-matter-bridge": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "discover": "node src/index.js --discover",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@matter/main": "0.18.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "ws": "^8.23.0"
+  }
+}

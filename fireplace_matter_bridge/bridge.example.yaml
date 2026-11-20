@@ -1,0 +1,59 @@
+# Fireplace Matter Bridge configuration.
+#
+# Standalone: copy to bridge.yaml (or pass --config <file>).
+# Home Assistant add-on: the connection to Home Assistant is automatic; put any of the optional
+# `fireplaces:` settings below into /addon_configs/local_fireplace_matter_bridge/fireplace-matter-bridge.yaml.
+
+homeassistant:
+  # Not needed when running as a Home Assistant add-on.
+  url: ws://homeassistant.local:8123/api/websocket
+  # Long-lived access token (Profile -> Security -> Long-lived access tokens)
+  token: "PASTE_TOKEN_HERE"
+
+matter:
+  bridge_name: Chalet Fireplace Bridge
+  port: 5540
+  # Change these from the defaults before pairing (passcode: 8 digits, not 12345678/11111111/etc.)
+  passcode: 20202021
+  discriminator: 3840
+
+# Where the Matter pairing data is stored. Keep it: deleting it means re-pairing in Apple Home.
+storage_path: ./.matter-storage
+
+# Optional. Leave `fireplaces` out entirely to expose every Proflame fireplace that is found automatically
+# (integrations proflame2, proflame_wifi). Run `npm run discover` to see what will be exposed.
+fireplaces:
+  - device: Great Room Fireplace      # Home Assistant device name (or device id); omit if you have one fireplace
+    # integration: proflame2          # restrict discovery to one integration
+    # name: Great Room Fireplace      # name of the main tile in Apple Home
+    # label: Great Room               # prefix for the other tiles ("Great Room Blower", ...)
+    # debounce_ms: 600                # coalesce slider moves before talking to the fireplace
+
+    # Override / add entities by role (set to null to remove one that was found automatically):
+    # entities:
+    #   power: switch.great_room_fireplace_power
+    #   flame: number.great_room_fireplace_flame
+    #   fan: number.great_room_fireplace_fan
+    #   light_level: number.great_room_fireplace_light   # Proflame light 0..6 (number)
+    #   accent_light: light.great_room_accent_light      # or a light entity
+    #   led_strip: light.great_room_led_strip
+    #   front_burner: switch.great_room_fireplace_front_burner
+    #   aux: switch.great_room_fireplace_aux
+    #   pilot: switch.great_room_fireplace_cpi
+    #   thermostat: climate.great_room_thermostat
+    #   timer: number.great_room_auto_off_timer
+    #   room_temperature: sensor.great_room_room_temperature
+
+    # Hide individual Apple Home tiles:
+    # expose:
+    #   presets: false          # Smart / Eco / Manual mode switches (Proflame WiFi)
+    #   timer: false            # Auto-off timer switches (Proflame WiFi)
+    #   room_temperature: false
+
+    # Auto-off timer switches, in minutes (Proflame WiFi only)
+    # timer_presets: [30, 60, 120, 240]
+
+    # Anything else to expose (buttons/scripts become momentary switches):
+    # extra:
+    #   - entity_id: script.fireplace_cozy_evening
+    #     name: Cozy Evening
